@@ -2,25 +2,39 @@
 #include "signal.hpp"
 #include "types.hpp"
 
+void WriteLine(i32 i, i32 sum) {
+	std::cout << i << " : " << sum << std::endl;
+}
+
+void Fibonacci(i32 n) {
+	auto sum = Past(1);
+	auto i = Signal<i32>(0, [&sum, n](Signal<i32>& i) {
+		if (i < n) {
+			sum = sum + sum.previous();
+			i++;
+		}
+	});
+	i++;
+	WriteLine(i, sum);
+}
+
 int main()
 {
 	constexpr auto max_n = 19;
-	for (auto n = 0; n <= max_n; ++n) {
-		if (n == 0) {
-			std::cout << "0 : 0" << std::endl;
-			continue;
-		}
 
-		auto sum = Past(1);
-		auto outer_i = Signal<i32>(0, [&sum, n](Signal<i32>& i) {
-			if (i < n) {
-				sum = sum + sum.previous();
-				i++;
-			}
+	auto n = Signal<i32>(-1, [max_n](Signal<i32>& n) {
+		if (n == 0) {
+			WriteLine(0, 0);
+			n++;
+			return;
+		}
+		if (n > max_n) {
+			return;
+		}
+		Fibonacci(n);
+		n++;
 		});
-		outer_i++;
-		std::cout << outer_i << " : " << sum << std::endl;
-	}
+	n++;
 
 	return 0;
 }
