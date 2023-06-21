@@ -2,7 +2,7 @@
 #include "signal.hpp"
 #include "types.hpp"
 
-void WriteLine(i32 i, i32 sum) {
+void WriteLine(const i32 i, const i32 sum) {
 	std::cout << i << " : " << sum << std::endl;
 }
 
