@@ -63,4 +63,6 @@ public:
 		os << self._value;
 		return os;
 	}
+
+	operator T() const { return _value; }
 };
