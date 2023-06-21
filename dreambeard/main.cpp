@@ -33,7 +33,7 @@ int main()
 		}
 		Fibonacci(n);
 		n++;
-		});
+	});
 	n++;
 
 	return 0;
